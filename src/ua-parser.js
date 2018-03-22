@@ -103,7 +103,7 @@
                 while (j < regex.length && !matches) {
 
                     matches = regex[j++].exec(ua);
-
+                    
                     if (!!matches) {
                         for (p = 0; p < props.length; p++) {
                             match = matches[++k];
@@ -729,13 +729,12 @@
             /android.+(Gigaset)[\s\-]+(Q.+)\s+build/i                           // Gigaset Tablets
             ], [VENDOR, MODEL, [TYPE, TABLET]], [
 
+            /android.+[;\/]\s(.+)build/i                                          // Generic Android Device
+            ], [MODEL, [VENDOR, 'Generic'], [
+
             /\s(tablet|tab)[;\/]/i,                                             // Unidentifiable Tablet
             /\s(mobile)(?:[;\/]|\ssafari)/i                                     // Unidentifiable Mobile
-            ], [[TYPE, util.lowerize], VENDOR, MODEL], [
-
-            /(android.+)[;\/].+build/i                                          // Generic Android Device
-            ], [MODEL, [VENDOR, 'Generic']]
-
+            ], [[TYPE, util.lowerize], VENDOR, MODEL]]
 
         /*//////////////////////////
             // TODO: move to string map
